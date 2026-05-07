@@ -1,0 +1,7 @@
+Lỗi 1: Thiếu bước Checkout Code trong Workflow
+Đây là lỗi khiến pipeline "chết" ngay từ đầu vì nó không thấy code đâu để build.
+File: .github/workflows/ci.yml
+Vị trí: Trước bước Set up JDK 17.
+Dấu hiệu trong Log (Dự đoán): Could not find pom.xml, No such file or directory hoặc lỗi khi chạy lệnh mvn.
+Nguyên nhân kỹ thuật: GitHub Actions chạy trên một máy ảo sạch. Nếu bạn không dùng action checkout, máy ảo
+đó sẽ trống rỗng, không có mã nguồn của bạn. Cách sửa: Thêm bước actions/checkout@v3 vào đầu danh sách steps.

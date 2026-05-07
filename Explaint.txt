@@ -48,6 +48,29 @@ nên nó đi ngang qua các file Test của bạn mà... không làm gì cả. N
 một cách vui vẻ.Bạn cần cập nhật maven-surefire-plugin lên phiên bản mới hơn trong file pom.xml.
 
 4. Lỗi sai logic nghiệp vụ (Business Logic Error).
+Error:  Failures:
+Error:    ShippingCalculatorTest.testStandard:12 expected: <15000.0> but was: <10000.0>
+[INFO]
+Error:  Tests run: 3, Failures: 1, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.211 s
+[INFO] Finished at: 2026-05-07T16:17:32Z
+[INFO] ------------------------------------------------------------------------
+Error:  Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.1.2:test (default-test) on project shipping-app: There are test failures.
+Error:
+Error:  Please refer to /home/runner/work/Bai10/Bai10/target/surefire-reports for the individual test results.
+Error:  Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+Error:  -> [Help 1]
+Error:
+Error:  To see the full stack trace of the errors, re-run Maven with the -e switch.
+Error:  Re-run Maven using the -X switch to enable full debug logging.
+Error:
+Error:  For more information about the errors and possible solutions, please read the following articles:
+Error:  [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Error: Process completed with exit code 1.
 Cố tình sửa sai công thức tính toán trong mã nguồn khiến kết quả thực tế không khớp với kết
 quả kỳ vọng đã định nghĩa trong Unit Test. Hàm AssertEquals bắt được lỗi này đánh dấu Test Failed,
 dẫn đến việc quá trình build của Maven thất bại và làm vỡ pipeline."

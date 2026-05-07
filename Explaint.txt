@@ -1,7 +1,7 @@
-Lỗi 1: Thiếu bước Checkout Code trong Workflow
-Đây là lỗi khiến pipeline "chết" ngay từ đầu vì nó không thấy code đâu để build.
-File: .github/workflows/ci.yml
-Vị trí: Trước bước Set up JDK 17.
-Dấu hiệu trong Log (Dự đoán): Could not find pom.xml, No such file or directory hoặc lỗi khi chạy lệnh mvn.
-Nguyên nhân kỹ thuật: GitHub Actions chạy trên một máy ảo sạch. Nếu bạn không dùng action checkout, máy ảo
-đó sẽ trống rỗng, không có mã nguồn của bạn. Cách sửa: Thêm bước actions/checkout@v3 vào đầu danh sách steps.
+1. Tại sao khi chạy GitHub Actions lại báo lỗi "Tôi không thấy file POM nào ở đây cả!"?
+Khi bạn nhấn "Push" code lên GitHub, một máy ảo (Ubuntu) sẽ được khởi tạo để chạy các lệnh trong file ci.yml.
+Tuy nhiên, máy ảo này ban đầu là trống rỗng.
+Mặc dù code của bạn đã nằm trên Server của GitHub, nhưng bạn chưa ra lệnh cho máy ảo tải
+(clone) code đó về thư mục làm việc của nó. Khi lệnh mvn package chạy, nó tìm file pom.xml
+để biết cách build, nhưng vì thư mục đang trống nên nó báo lỗi: "Tôi không thấy file POM nào ở đây cả!".
+Bạn cần thêm bước Checkout vào trước bước cài đặt Java. Đây là bước "mở cửa" để máy ảo kéo code từ repository về.

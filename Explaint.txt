@@ -1,7 +1,40 @@
 1. Tại sao khi chạy GitHub Actions lại báo lỗi "Tôi không thấy file POM nào ở đây cả!"?
+Error: The goal you specified requires a project to execute but there is no POM in this directory (/home/runner/work/Bai10/Bai10). Please verify you invoked Maven from the correct directory. -> [Help 1]
+
+Error:
+
+Error: To see the full stack trace of the errors, re-run Maven with the -e switch.
+
+Error: Re-run Maven using the -X switch to enable full debug logging.
+
+Error:
+
+Error: For more information about the errors and possible solutions, please read the following articles:
+
+Error: [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MissingProjectException
+
+Error: Process completed with exit code 1.
 Khi bạn nhấn "Push" code lên GitHub, một máy ảo (Ubuntu) sẽ được khởi tạo để chạy các lệnh trong file ci.yml.
 Tuy nhiên, máy ảo này ban đầu là trống rỗng.
 Mặc dù code của bạn đã nằm trên Server của GitHub, nhưng bạn chưa ra lệnh cho máy ảo tải
 (clone) code đó về thư mục làm việc của nó. Khi lệnh mvn package chạy, nó tìm file pom.xml
 để biết cách build, nhưng vì thư mục đang trống nên nó báo lỗi: "Tôi không thấy file POM nào ở đây cả!".
 Bạn cần thêm bước Checkout vào trước bước cài đặt Java. Đây là bước "mở cửa" để máy ảo kéo code từ repository về.
+
+2. Tại sao khi chạy GitHub Actions lại báo lỗi "Could not resolve dependencies for project com.lab:shipping-app:jar:1.0-SNAPSHOT"?
+Error:  Failed to execute goal on project shipping-app: Could not resolve dependencies for project com.lab:shipping-app:jar:1.0-SNAPSHOT
+Error:  dependency: ch.qos.logback:logback-classic:jar:9.9.9 (compile)
+Error:  	Could not find artifact ch.qos.logback:logback-classic:jar:9.9.9 in central (https://repo.maven.apache.org/maven2)
+Error:
+Error:  -> [Help 1]
+Error:
+Error:  To see the full stack trace of the errors, re-run Maven with the -e switch.
+Error:  Re-run Maven using the -X switch to enable full debug logging.
+Error:
+Error:  For more information about the errors and possible solutions, please read the following articles:
+Error:  [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+Error: Process completed with exit code 1.
+Maven cố gắng tải thư viện Logback phiên bản 9.9.9 từ kho lưu trữ trực tuyến (Maven Central).
+Tuy nhiên, trên thực tế, phiên bản cao nhất hiện tại của Logback chỉ mới loanh quanh đầu 1.x hoặc 1.4.x.
+Phiên bản 9.9.9 là một con số "ảo" không tồn tại, khiến Maven không thể tải về để build dự án.
+Bạn cần mở file pom.xml và sửa lại số phiên bản của logback-classic về một phiên bản thực tế.

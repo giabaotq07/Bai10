@@ -46,3 +46,8 @@ Tuy nhiên, plugin dùng để chạy test là maven-surefire-plugin lại đang
 Các phiên bản Surefire cũ (dưới 2.22.0) không hề biết JUnit 5 là gì,
 nên nó đi ngang qua các file Test của bạn mà... không làm gì cả. Nó tưởng dự án không có test nên báo "Xong!"
 một cách vui vẻ.Bạn cần cập nhật maven-surefire-plugin lên phiên bản mới hơn trong file pom.xml.
+
+4. Lỗi sai logic nghiệp vụ (Business Logic Error).
+Cố tình sửa sai công thức tính toán trong mã nguồn khiến kết quả thực tế không khớp với kết
+quả kỳ vọng đã định nghĩa trong Unit Test. Hàm AssertEquals bắt được lỗi này đánh dấu Test Failed,
+dẫn đến việc quá trình build của Maven thất bại và làm vỡ pipeline."
